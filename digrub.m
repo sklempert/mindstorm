@@ -1532,3 +1532,30 @@ function ForMindstorm_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of ForMindstorm
+
+
+% --- Executes on button press in scanButton.
+function scanButton_Callback(hObject, eventdata, handles)
+% hObject    handle to scanButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% parity();
+mindstorm_scan();
+
+
+% --- Executes on button press in connectButton.
+function connectButton_Callback(hObject, eventdata, handles)
+% hObject    handle to connectButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global brickObj;
+brickObj = EV3();
+brickObj.connect('usb');
+
+% --- Executes on button press in disconnectButton.
+function disconnectButton_Callback(hObject, eventdata, handles)
+% hObject    handle to disconnectButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global brickObj;
+brickObj.disconnect();
