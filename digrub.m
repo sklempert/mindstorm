@@ -1217,6 +1217,7 @@ d = size(R,1);
 a = get(handles.AnimSol,'Value');
 b = get(handles.MethodMenu,'Value');
 forMindstorm = get(handles.ForMindstorm,'Value');
+orig_solution = {};
 method = get(handles.MethodMenu,'String');
 if iscell(method)
     method = method{b};
@@ -1253,7 +1254,10 @@ switch method
         time = toc;
         solution = rubopt(solution);
         mindstorm_solution = sol2mindstorm(solution);
-        solution = mindstorm_solution;
+        if forMindstorm == 1
+          orig_solution = solution;
+          solution = mindstorm_solution;
+        end
         nmoves = numel(solution);
         message = {sprintf('Elapsed time: %s seconds',num2str(round(time*100)/100));...
                    sprintf('Number of moves: %d',nmoves)};
@@ -1262,18 +1266,26 @@ switch method
     case 'Layer by Layer'
         [R,solution,time,nmoves] = rubsolve(R);
         mindstorm_solution = sol2mindstorm(solution);
+        if forMindstorm == 1
+            orig_solution = solution;
+            solution = mindstorm_solution;
+        end
         message = {sprintf('Elapsed time: %s seconds',num2str(round(time*100)/100));...
-                   sprintf('Number of moves: %d',nmoves)};
+            sprintf('Number of moves: %d',nmoves)};
         set(handles.TextMessage,'String',{'Solved!';message{1};message{2}})
-	if a
+        if a
             rubplot(R0,solution);
-	end
+        end
         solution = move2rub(solution);
     case 'God''s Algorithm'
         tic
         [rot,solution] = Solve222(R);
         time = toc;
         mindstorm_solution = sol2mindstorm(solution);
+        if forMindstorm == 1
+            orig_solution = solution;
+            solution = mindstorm_solution;
+        end
         nmoves = numel(solution);
         message = {sprintf('Elapsed time: %s seconds',num2str(round(time*100)/100));...
                    sprintf('Number of moves: %d',nmoves)};
@@ -1286,6 +1298,10 @@ switch method
         time = toc;
         nmoves = numel(solution);
         mindstorm_solution = sol2mindstorm(solution);
+        if forMindstorm == 1
+            orig_solution = solution;
+            solution = mindstorm_solution;
+        end
         message = {sprintf('Elapsed time: %s seconds',num2str(round(time*100)/100));...
                    sprintf('Number of moves: %d',nmoves)};
         set(handles.TextMessage,'String',{'Solved!';message{1};message{2}})
@@ -1390,6 +1406,9 @@ if strcmp(ui,'Yes')
         end
         fprintf(fid,'%s',Log{end});
     end
+    if numel(orig_solution) > 0
+        solution = orig_solution;
+    end
     fprintf(fid,'\n\nSolution (%d moves):\n',numel(solution));
     count = 0;
     for i=1:numel(solution)-1
@@ -1402,17 +1421,19 @@ if strcmp(ui,'Yes')
     end
     fprintf(fid,'%s',solution{end});
 
-    fprintf(fid,'\n\nMindstorm solution (%d moves):\n',numel(mindstorm_solution));
-    count = 0;
-    for i=1:numel(mindstorm_solution)-1
-        fprintf(fid,'%s,',mindstorm_solution{i});
-        count = count + numel(mindstorm_solution{i})+1;
-        if count>72
-            count = 0;
-            fprintf(fid,'\n');
+    if numel(mindstorm_solution) > 0
+        fprintf(fid,'\n\nMindstorm solution (%d moves):\n',numel(mindstorm_solution));
+        count = 0;
+        for i=1:numel(mindstorm_solution)-1
+            fprintf(fid,'%s,',mindstorm_solution{i});
+            count = count + numel(mindstorm_solution{i})+1;
+            if count>72
+                count = 0;
+                fprintf(fid,'\n');
+            end
         end
+        fprintf(fid,'%s',mindstorm_solution{end});
     end
-    fprintf(fid,'%s',mindstorm_solution{end});
 
     
     fclose(fid);

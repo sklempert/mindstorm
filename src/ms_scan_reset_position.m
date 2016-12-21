@@ -4,21 +4,16 @@ sm = brickObj.motorD;
 ss = brickObj.sensor4
 
 if ss.value == 1
-    ms_start(sm, -50, 0);
+    ms_start(sm, -90, 0);
     while ss.value == 1
     end
     ms_stop(sm);
 end
 
-test=1
-% pause(0.2);
 ms_start(sm, 50, 0);
-test=2
 while ss.value == 0
 end
-test=3
 ms_stop(sm);
-
 
 
 % sm.speedRegulation = 0;
@@ -80,4 +75,3 @@ ms_stop(sm);
 % %end
 % 
 % end
-

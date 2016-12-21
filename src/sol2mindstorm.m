@@ -1,6 +1,6 @@
 function [ transformed_solution ] = sol2mindstorm( solution )
 
-transformed_solution = {}
+transformed_solution = {};
 for i=1:numel(solution)
     move = solution{i};
     switch move(1)
