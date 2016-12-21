@@ -1,0 +1,93 @@
+\begin{theindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter B
+  \item batteryMode (source.EV3 attribute), \hyperpage{3}
+  \item batteryValue (source.EV3 attribute), \hyperpage{4}
+  \item beep() (source.EV3 method), \hyperpage{4}
+  \item brakeMode (source.Motor attribute), \hyperpage{7}
+
+  \indexspace
+  \bigletter C
+  \item connect() (source.EV3 method), \hyperpage{4}
+  \item currentSpeed (source.Motor attribute), \hyperpage{8}
+
+  \indexspace
+  \bigletter D
+  \item debug (source.EV3 attribute), \hyperpage{3}
+  \item debug (source.Motor attribute), \hyperpage{8}
+  \item debug (source.Sensor attribute), \hyperpage{11}
+  \item disconnect() (source.EV3 method), \hyperpage{4}
+
+  \indexspace
+  \bigletter E
+  \item EV3 (class in source), \hyperpage{3}
+
+  \indexspace
+  \bigletter I
+  \item internalReset() (source.Motor method), \hyperpage{8}
+  \item isConnected (source.EV3 attribute), \hyperpage{4}
+  \item isRunning (source.Motor attribute), \hyperpage{8}
+
+  \indexspace
+  \bigletter L
+  \item limitMode (source.Motor attribute), \hyperpage{7}
+  \item limitValue (source.Motor attribute), \hyperpage{7}
+
+  \indexspace
+  \bigletter M
+  \item mode (source.Sensor attribute), \hyperpage{11}
+  \item Motor (class in source), \hyperpage{7}
+  \item motorA (source.EV3 attribute), \hyperpage{3}
+  \item motorB (source.EV3 attribute), \hyperpage{3}
+  \item motorC (source.EV3 attribute), \hyperpage{3}
+  \item motorD (source.EV3 attribute), \hyperpage{3}
+
+  \indexspace
+  \bigletter P
+  \item playTone() (source.EV3 method), \hyperpage{5}
+  \item power (source.Motor attribute), \hyperpage{7}
+
+  \indexspace
+  \bigletter R
+  \item reset() (source.Sensor method), \hyperpage{12}
+  \item resetTachoCount() (source.Motor method), \hyperpage{8}
+
+  \indexspace
+  \bigletter S
+  \item Sensor (class in source), \hyperpage{11}
+  \item sensor1 (source.EV3 attribute), \hyperpage{3}
+  \item sensor2 (source.EV3 attribute), \hyperpage{3}
+  \item sensor3 (source.EV3 attribute), \hyperpage{3}
+  \item sensor4 (source.EV3 attribute), \hyperpage{3}
+  \item setBrake() (source.Motor method), \hyperpage{8}
+  \item setProperties() (source.EV3 method), \hyperpage{5}
+  \item setProperties() (source.Motor method), \hyperpage{8}
+  \item setProperties() (source.Sensor method), \hyperpage{12}
+  \item smoothStart (source.Motor attribute), \hyperpage{7}
+  \item smoothStop (source.Motor attribute), \hyperpage{7}
+  \item source (module), \hyperpage{1}
+  \item speedRegulation (source.Motor attribute), \hyperpage{7}
+  \item start() (source.Motor method), \hyperpage{9}
+  \item stop() (source.Motor method), \hyperpage{9}
+  \item stopAllMotors() (source.EV3 method), \hyperpage{5}
+  \item stopTone() (source.EV3 method), \hyperpage{5}
+  \item syncedStart() (source.Motor method), \hyperpage{9}
+  \item syncedStop() (source.Motor method), \hyperpage{10}
+
+  \indexspace
+  \bigletter T
+  \item tachoCount (source.Motor attribute), \hyperpage{8}
+  \item tonePlayed() (source.EV3 method), \hyperpage{5}
+  \item type (source.Motor attribute), \hyperpage{8}
+  \item type (source.Sensor attribute), \hyperpage{12}
+
+  \indexspace
+  \bigletter V
+  \item value (source.Sensor attribute), \hyperpage{12}
+
+  \indexspace
+  \bigletter W
+  \item waitFor() (source.Motor method), \hyperpage{10}
+
+\end{theindex}

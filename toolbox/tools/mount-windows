@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# script to ease mounting a SMB share
+# (c) 2007 Johannes Ballé
+
+licenseBackup() {
+	# move .flexlmborrow to ~/work and add link to ~/
+	FLEXLM_OLD=~/.flexlmborrow
+	FLEXLM_NEW=~/work/.flexlmborrow
+	[ -d ~/work -a -f $FLEXLM_OLD -a ! -h $FLEXLM_OLD  ] && ( mv -f $FLEXLM_OLD $FLEXLM_NEW )
+	[ -f $FLEXLM_NEW -a ! -f $FLEXLM_OLD  ] && ( ln -s $FLEXLM_NEW $FLEXLM_OLD )
+}
+
+SHARENAME="$1"
+OPTIONS="$2"
+
+if [ "${SHARENAME:0:2}" != "//" -o $# -ge 3 ]; then
+	echo "Syntax: ${0##*/} //{servername}/{sharename} [option1=xxx,option2,...]" >&2
+	exit 1
+fi
+
+# check if work directory already exists
+if [ -e ~/work ]; then
+	echo "Error: MATLAB work directory already exists" >&2
+	licenseBackup
+	exit 1
+fi
+
+mkdir ~/work
+
+# mount Windows share
+# newer Ubuntu releases require root permissions - use sudo
+MACHINE_TYPE=`uname -m`
+if [ "$OPTIONS" ]; then
+	if [ ${MACHINE_TYPE} == 'x86_64' ]; then
+		sudo mount.cifs "$SHARENAME" ~/work -o "$OPTIONS" || rm -rf ~/work
+	else
+		mount.cifs "$SHARENAME" ~/work -o "$OPTIONS" || rm -rf ~/work
+	fi
+else
+	if [ ${MACHINE_TYPE} == 'x86_64' ]; then
+		sudo mount.cifs "$SHARENAME" ~/work -o uid=999,gid=999 || rm -rf ~/work
+	else
+		mount.cifs "$SHARENAME" ~/work || rm -rf ~/work
+	fi
+fi
+
+licenseBackup

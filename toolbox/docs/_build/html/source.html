@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>EV3 &#8212; Mindstorms EV3 Toolbox v0.3-rc.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'v0.3-rc.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Mindstorms EV3 Toolbox v0.3-rc.8 documentation" href="index.html" />
+    <link rel="prev" title="Toolbox for controlling Lego Mindstorms EV3 with MATLAB" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Mindstorms EV3 Toolbox</a>
+        <span class="navbar-text navbar-version pull-left"><b>v0.3</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">EV3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#motor">Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#sensor">Sensor</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">EV3</a></li>
+<li><a class="reference internal" href="#motor">Motor</a></li>
+<li><a class="reference internal" href="#sensor">Sensor</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="index.html" title="Previous Chapter: Toolbox for controlling Lego Mindstorms EV3 with MATLAB"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Toolbox for c...</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/source.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <span class="target" id="module-source"></span><div class="section" id="ev3">
+<h1>EV3<a class="headerlink" href="#ev3" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="source.EV3">
+<em class="property">class </em><code class="descclassname">source.</code><code class="descname">EV3</code><span class="sig-paren">(</span><em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#source.EV3" title="Permalink to this definition">¶</a></dt>
+<dd><p>High-level class to work with physical bricks.</p>
+<p>This is the &#8216;central&#8217; class (from user&#8217;s view) when working with this toolbox. It
+delivers a convenient interface for creating a connection to the brick and sending
+commands to it. An EV3-object creates 4 Motor- and 4 Sensor-objects, one for each port.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Creating multiple EV3 objects and connecting them to different physical bricks has not
+been thoroughly tested yet, but seems to work on a first glance.</li>
+</ul>
+<dl class="attribute">
+<dt id="source.EV3.motorA">
+<code class="descname">motorA</code><a class="headerlink" href="#source.EV3.motorA" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Motor</em> &#8211; Motor-object interfacing port A</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.motorB">
+<code class="descname">motorB</code><a class="headerlink" href="#source.EV3.motorB" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Motor</em> &#8211; Motor-object interfacing port B</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.motorC">
+<code class="descname">motorC</code><a class="headerlink" href="#source.EV3.motorC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Motor</em> &#8211; Motor-object interfacing port C</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.motorD">
+<code class="descname">motorD</code><a class="headerlink" href="#source.EV3.motorD" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Motor</em> &#8211; Motor-object interfacing port D</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.sensor1">
+<code class="descname">sensor1</code><a class="headerlink" href="#source.EV3.sensor1" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Sensor</em> &#8211; Motor-object interfacing port 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.sensor2">
+<code class="descname">sensor2</code><a class="headerlink" href="#source.EV3.sensor2" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Sensor</em> &#8211; Motor-object interfacing port 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.sensor3">
+<code class="descname">sensor3</code><a class="headerlink" href="#source.EV3.sensor3" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Sensor</em> &#8211; Motor-object interfacing port 3</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.sensor4">
+<code class="descname">sensor4</code><a class="headerlink" href="#source.EV3.sensor4" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Sensor</em> &#8211; Motor-object interfacing port 4</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.debug">
+<code class="descname">debug</code><a class="headerlink" href="#source.EV3.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>numeric in {0,1,2}</em> &#8211; Debug mode. <em>[WRITABLE]</em></p>
+<ul class="simple">
+<li>0: Debug turned off</li>
+<li>1: Debug turned on for EV3-object -&gt; enables feedback in the console about what firmware-commands have been called when using a method</li>
+<li>2: Low-level-Debug turned on -&gt; each packet sent and received is printed to the console</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.batteryMode">
+<code class="descname">batteryMode</code><a class="headerlink" href="#source.EV3.batteryMode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>string in {&#8216;Percentage&#8217;, &#8216;Voltage&#8217;}</em> &#8211; Mode for reading battery charge.
+<em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.batteryValue">
+<code class="descname">batteryValue</code><a class="headerlink" href="#source.EV3.batteryValue" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>numeric</em> &#8211; Current battery charge. Depending on batteryMode, the reading
+is either in percentage or voltage. <em>[READ-ONLY]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.EV3.isConnected">
+<code class="descname">isConnected</code><a class="headerlink" href="#source.EV3.isConnected" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> &#8211; True if virtual brick-object is connected to physical one. <em>[READ-ONLY]</em></p>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<p>b = EV3(); <br />
+b.connect(&#8216;usb&#8217;); <br />
+ma = b.motorA; <br />
+ma.setProperties(&#8216;power&#8217;, 50, &#8216;limitValue&#8217;, 720); <br />
+ma.start(); <br />
+% fun <br />
+b.sensor1.value <br />
+b.waitFor(); <br />
+b.beep(); <br />
+delete b; <br /></p>
+<dl class="method">
+<dt id="source.EV3.beep">
+<code class="descname">beep</code><span class="sig-paren">(</span><em>ev3</em><span class="sig-paren">)</span><a class="headerlink" href="#source.EV3.beep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plays a &#8216;beep&#8217;-tone on brick.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>This equals playTone(10, 1000, 100) (Wraps the same opCode in comm-layer)</li>
+</ul>
+<p class="rubric">Example</p>
+<p>b = EV3(); <br />
+b.connect(&#8216;bt&#8217;, &#8216;serPort&#8217;, &#8216;/dev/rfcomm0&#8217;); <br />
+b.beep(); <br /></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.EV3.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><em>ev3</em>, <em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#source.EV3.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connects EV3-object and its Motors and Sensors to physical brick.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>connectionType</strong> (<em>string in {'bt', 'usb'}</em>) &#8211; Connection type</li>
+<li><strong>serPort</strong> (<em>string in {'/dev/rfcomm1', '/dev/rfcomm2', ...}</em>) &#8211; Path to serial port
+(if &#8216;bt&#8217;)</li>
+<li><strong>beep</strong> (<em>bool</em>) &#8211; If true, EV3 beeps if connection has been established</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>% Setup bluetooth connection via com-port 0 <br />
+b = EV3(); <br />
+b.connect(&#8216;bt&#8217;, &#8216;serPort&#8217;, &#8216;/dev/rfcomm0&#8217;); <br />
+% Setup usb connection, beep when connection has been established
+b = EV3(); <br />
+b.connect(&#8216;usb&#8217;, &#8216;beep&#8217;, &#8216;on&#8217;, ); <br /></p>
+<p>Check connection</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.EV3.disconnect">
+<code class="descname">disconnect</code><span class="sig-paren">(</span><em>ev3</em><span class="sig-paren">)</span><a class="headerlink" href="#source.EV3.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnects EV3-object and its Motors and Sensors from physical brick.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Gets called automatically when EV3-object is destroyed.</li>
+</ul>
+<p class="rubric">Example</p>
+<p>b = EV3();
+b.connect(&#8216;bt&#8217;, &#8216;serPort&#8217;, &#8216;/dev/rfcomm0&#8217;);
+% do stuff
+b.disconnect();</p>
+<p>Reset motors and sensors before disconnecting</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.EV3.playTone">
+<code class="descname">playTone</code><span class="sig-paren">(</span><em>ev3</em>, <em>volume</em>, <em>frequency</em>, <em>duration</em><span class="sig-paren">)</span><a class="headerlink" href="#source.EV3.playTone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plays tone on brick.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>volume</strong> (<em>numeric in [0, 100]</em>) &#8211; in percent</li>
+<li><strong>frequency</strong> (<em>numeric in [250, 10000]</em>) &#8211; in Hertz</li>
+<li><strong>duration</strong> (<em>numeric &gt;0</em>) &#8211; in milliseconds</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>b = EV3(); <br />
+b.connect(&#8216;bt&#8217;, &#8216;serPort&#8217;, &#8216;/dev/rfcomm0&#8217;); <br />
+b.playTone(50, 5000, 1000);  % Plays tone with 50% volume and 5000Hz for 1
+second. <br /></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.EV3.setProperties">
+<code class="descname">setProperties</code><span class="sig-paren">(</span><em>ev3</em>, <em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#source.EV3.setProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set multiple EV3 properties at once using MATLAB&#8217;s inputParser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>debug</strong> (<em>numeric in {0,1,2}</em>) &#8211; see EV3.debug <em>[OPTIONAL]</em></li>
+<li><strong>batteryMode</strong> (<em>string in {'Voltage'/'Percentage'}</em>) &#8211; see EV3.batteryMode <em>[OPTIONAL]</em></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>b = EV3(); <br />
+b.connect(&#8216;bt&#8217;, &#8216;serPort&#8217;, &#8216;/dev/rfcomm0&#8217;); <br />
+b.setProperties(&#8216;debug&#8217;, &#8216;on&#8217;, &#8216;batteryMode&#8217;, &#8216;Voltage&#8217;); <br />
+% Instead of: b.debug = &#8216;on&#8217;; b.batteryMode = &#8216;Voltage&#8217;; <br /></p>
+<p>See also EV3.DEBUG, EV3.BATTERYMODE</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.EV3.stopAllMotors">
+<code class="descname">stopAllMotors</code><span class="sig-paren">(</span><em>ev3</em><span class="sig-paren">)</span><a class="headerlink" href="#source.EV3.stopAllMotors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a stop-command to all motor-ports</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.EV3.stopTone">
+<code class="descname">stopTone</code><span class="sig-paren">(</span><em>ev3</em><span class="sig-paren">)</span><a class="headerlink" href="#source.EV3.stopTone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops tone currently played</p>
+<p class="rubric">Example</p>
+<p>b = EV3(); <br />
+b.connect(&#8216;bt&#8217;, &#8216;serPort&#8217;, &#8216;/dev/rfcomm0&#8217;); <br />
+b.playTone(10,100,100000000);  % Accidentally given wrong tone duration :) <br />
+b.stopTone();  % Stops tone immediately. <br /></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.EV3.tonePlayed">
+<code class="descname">tonePlayed</code><span class="sig-paren">(</span><em>ev3</em><span class="sig-paren">)</span><a class="headerlink" href="#source.EV3.tonePlayed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests if tone is currently played.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>status</strong> &#8211; True if a tone is being played</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Example</dt>
+<dd>b = EV3(); <br />
+b.connect(&#8216;bt&#8217;, &#8216;serPort&#8217;, &#8216;/dev/rfcomm0&#8217;); <br />
+b.playTone(10, 100, 1000); <br />
+pause(0.5); <br />
+b.tonePlayed() -&gt; Outputs 1 to console. <br /></dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="motor">
+<h1>Motor<a class="headerlink" href="#motor" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="source.Motor">
+<em class="property">class </em><code class="descclassname">source.</code><code class="descname">Motor</code><span class="sig-paren">(</span><em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor" title="Permalink to this definition">¶</a></dt>
+<dd><p>High-level class to work with motors.</p>
+<p>This class is supposed to ease the use of the brick&#8217;s motors. It is possible to set all
+kinds of parameters, request the current status of the motor ports and of course send
+commands to the brick to be executed on the respective port.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>You don&#8217;t need to create instances of this class. The EV3-class automatically creates
+instances for each motor port, and you can work with them via the EV3-object.</li>
+<li>The Motor-class represents motor ports, not individual motors!</li>
+</ul>
+<dl class="attribute">
+<dt id="source.Motor.power">
+<code class="descname">power</code><a class="headerlink" href="#source.Motor.power" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>numeric in [-100, 100]</em> &#8211; Power level of motor in percent. <em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.speedRegulation">
+<code class="descname">speedRegulation</code><a class="headerlink" href="#source.Motor.speedRegulation" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> &#8211; Speed regulation turned on or off. When turned on, motor will
+try to &#8216;hold&#8217; its speed at given power level, whatever the load. In this mode, the
+highest possible speed depends on the load and mostly goes up to around 70-80 (at
+this point, the Brick internally input 100% power). When turned off, motor will
+constantly input the same power into the motor. The resulting speed will be
+somewhat lower, depending on the load. <em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.smoothStart">
+<code class="descname">smoothStart</code><a class="headerlink" href="#source.Motor.smoothStart" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>numeric s. t. smoothStart+smoothStop &lt; limitValue</em> &#8211; Degrees/Time
+indicating how far/long the motor should smoothly start. Depending on limitMode,
+the input is interpreted either in degrees or milliseconds. The first
+{smoothStart}-milliseconds/degrees of limitValue the motor will slowly accelerate
+until reaching its defined speed. <em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.smoothStop">
+<code class="descname">smoothStop</code><a class="headerlink" href="#source.Motor.smoothStop" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>numeric s. t. smoothStart+smoothStop &lt; limitValue</em> &#8211; Degrees/Time
+indicating how far/long the motor should smoothly stop. Depending on limitMode, the
+input is interpreted either in degrees or milliseconds. The last
+[smoothStop]-milliseconds/degrees of limitValue the motor will slowly slow down
+until it has stopped. <em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.limitValue">
+<code class="descname">limitValue</code><a class="headerlink" href="#source.Motor.limitValue" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>numeric&gt;=0</em> &#8211; Degrees/Time indicating how far/long the motor should run.
+Depending on limitMode, the input is interpreted either in degrees or
+milliseconds. <em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.limitMode">
+<code class="descname">limitMode</code><a class="headerlink" href="#source.Motor.limitMode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>&#8216;Tacho&#8217;|&#8217;Time&#8217;</em> &#8211; Mode for motor limit. <em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.brakeMode">
+<code class="descname">brakeMode</code><a class="headerlink" href="#source.Motor.brakeMode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>&#8216;Brake&#8217;|&#8217;Coast&#8217;</em> &#8211; Mode for braking. If &#8216;Coast&#8217;, the motor will (at
+tacholimit, if ~=0) coast to a stop. If &#8216;Brake&#8217;, the motor will stop immediately
+(at tacholimit, if ~=0) and hold the brake. <em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.debug">
+<code class="descname">debug</code><a class="headerlink" href="#source.Motor.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> &#8211; Debug turned on or off. In debug mode, everytime a command is passed to
+the sublayer (&#8216;communication layer&#8217;), there is feedback in the console about what
+command has been called. <em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.isRunning">
+<code class="descname">isRunning</code><a class="headerlink" href="#source.Motor.isRunning" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> &#8211; True if motor is running. <em>[READ-ONLY]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.tachoCount">
+<code class="descname">tachoCount</code><a class="headerlink" href="#source.Motor.tachoCount" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>numeric</em> &#8211; Current tacho count. <em>[READ-ONLY]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.currentSpeed">
+<code class="descname">currentSpeed</code><a class="headerlink" href="#source.Motor.currentSpeed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>numeric</em> &#8211; Current speed of motor. If speedRegulation=on this should equal power,
+otherwise it will probably be lower than that. <em>[READ-ONLY]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Motor.type">
+<code class="descname">type</code><a class="headerlink" href="#source.Motor.type" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DeviceType</em> &#8211; Type of connected device if any. <em>[READ-ONLY]</em></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Motor.internalReset">
+<code class="descname">internalReset</code><span class="sig-paren">(</span><em>motor</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor.internalReset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets internal tacho count. Use this if motor behaves weird (i.e. not starting at all, or not correctly
+running to limitValue)</p>
+<p>The internal tacho count is used for positioning the motor. When the
+motor is running with a tacho limit, internally it uses another counter than the
+one read by tachoCount. This internal tacho count needs to be reset if you
+physically change the motor&#8217;s position or it coasted into a stop. If the motor&#8217;s
+brakemode is &#8216;Coast&#8217;, this function is called automatically.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>A better name would probably be resetPosition...</li>
+</ul>
+<p>See also MOTOR.RESETTACHOCOUNT</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Motor.resetTachoCount">
+<code class="descname">resetTachoCount</code><span class="sig-paren">(</span><em>motor</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor.resetTachoCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets tachocount</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Motor.setBrake">
+<code class="descname">setBrake</code><span class="sig-paren">(</span><em>motor</em>, <em>brake</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor.setBrake" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply or release brake of motor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>brake</strong> (<em>bool</em>) &#8211; If true, brake will be pulled</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Motor.setProperties">
+<code class="descname">setProperties</code><span class="sig-paren">(</span><em>motor</em>, <em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor.setProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets multiple Motor properties at once using MATLAB&#8217;s inputParser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>debug</strong> (<em>bool</em>) &#8211; </li>
+<li><strong>smoothStart</strong> (<em>numeric in [0, limitValue]</em>) &#8211; </li>
+<li><strong>smoothStop</strong> (<em>numeric in [0, limitValue]</em>) &#8211; </li>
+<li><strong>speedRegulation</strong> (<em>bool</em>) &#8211; </li>
+<li><strong>brakeMode</strong> (<em>'Coast'|'Brake'</em>) &#8211; </li>
+<li><strong>limitMode</strong> (<em>'Time'|'Tacho'</em>) &#8211; </li>
+<li><strong>limitValue</strong> (<em>numeric &gt; 0</em>) &#8211; </li>
+<li><strong>power</strong> (<em>numeric in [-100,100]</em>) &#8211; </li>
+<li><strong>batteryMode</strong> (<em>'Voltage'|'Percentage'</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>b = EV3(); <br />
+b.connect(&#8216;bt&#8217;, &#8216;serPort&#8217;, &#8216;/dev/rfcomm0&#8217;); <br />
+b.motorA.setProperties(&#8216;debug&#8217;, &#8216;on&#8217;, &#8216;power&#8217;, 50, &#8216;limitValue&#8217;, 720, &#8216;speedRegulation&#8217;, &#8216;on&#8217;); <br />
+% Instead of: b.motorA.debug = &#8216;on&#8217;; <br />
+%             b.motorA.power = 50; <br />
+%             b.motorA.limitValue = 720; <br />
+%             b.motorA.speedRegulation = &#8216;on&#8217;; <br /></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Motor.start">
+<code class="descname">start</code><span class="sig-paren">(</span><em>motor</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the motor</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>Right now, alternatingly calling this function with and without tacho limit
+may lead to unexpected behaviour. For example, if you run the motor without
+a tacholimit for some time using Coast, then stop using Coast, and then try
+to run the with a tacholimit, it will stop sooner or later than expected,
+or may not even start at all.</li>
+<li>After calling one of the functions to control the motor with some kind of
+limit (which is done if limit~=0), the physical brick&#8217;s power/speed value for
+starting without a limit (i.e. if limit==0) is reset to zero. So if you want
+to control the motor without a limit after doing so with a limit, you would
+have to set the power manually to the desired value again. (I don&#8217;t really
+know if this is deliberate or a bug, and at this point, I&#8217;m too afraid to ask.)
+To avoid confusion, this is done automatically in this special case.
+However, this does not even work all the time. If motor does not
+start, call stop() and setPower() manually. :/</li>
+</ul>
+<p>Check connection and if motor is already running</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Motor.stop">
+<code class="descname">stop</code><span class="sig-paren">(</span><em>motor</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the motor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Motor.syncedStart">
+<code class="descname">syncedStart</code><span class="sig-paren">(</span><em>motor</em>, <em>syncMotor</em>, <em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor.syncedStart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts this motor synchronized with another</p>
+<p>This motor acts as a &#8216;master&#8217;, meaning that the synchronized control is done via
+this one. When syncedStart is called, the master sets some of the slave&#8217;s
+(syncMotor) properties to keep it consistent with the physical brick. So, for
+example, changing the power on the master motor will take effect
+on the slave as soon as this method is called.
+The following parameters will be affected on the slave: power, brakeMode,
+limitValue, speedRegulation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>syncMotor</strong> (<em>Motor</em>) &#8211; the motor-object to sync with</li>
+<li><strong>turnRatio</strong> (<em>numeric in [-200,200]</em>) &#8211; <p><em>[OPTIONAL]</em> <br /> (Excerpt of Firmware-comments, in c_output.c):
+&#8220;Turn ratio is how tight you turn and to what direction you turn.</p>
+<blockquote>
+<div><ul>
+<li>0 value is moving straight forward</li>
+<li>Negative values turn to the left</li>
+<li>Positive values turn to the right</li>
+<li>Value -100 stops the left motor</li>
+<li>Value +100 stops the right motor</li>
+<li>Values less than -100 makes the left motor run the opposite direction of the right motor (Spin)</li>
+<li>Values greater than +100 makes the right motor run the opposite direction of the left motor (Spin)&#8221;</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>This is right now a pretty &#8216;heavy&#8217; function, as it tests if both motors are
+connected AND aren&#8217;t running, wasting four packets, keep that in mind</li>
+<li>It is necessary to call syncedStop() and not stop() for stopping the motors
+(otherwise the sync-state cannot be exited correctly)</li>
+</ul>
+<p class="rubric">Example</p>
+<p>b = EV3(); <br />
+b.connect(&#8216;usb&#8217;); <br />
+m = b.motorA; <br />
+slave = b.motorB; <br />
+m.power = 50; <br />
+m.syncedStart(slave); <br />
+% Do stuff
+m.syncedStop(); <br /></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Motor.syncedStop">
+<code class="descname">syncedStop</code><span class="sig-paren">(</span><em>motor</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor.syncedStop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops both motors previously started with syncedStart.</p>
+<p>See also MOTOR.SYNCEDSTART</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Motor.waitFor">
+<code class="descname">waitFor</code><span class="sig-paren">(</span><em>motor</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Motor.waitFor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops execution of program as long as motor is running</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>(OLD)This one&#8217;s a bit tricky. The opCode OutputReady makes the brick stop sending
+responses until the motor has stopped. For security reasons, in this toolbox
+there is an internal timeout for receiving messages from the brick. It raises
+an error if a reply takes too long, which would happen in this case. As a
+workaround, there is an infinite loop that catches errors from outputReady and
+continues then, until outputReady will actually finish without an error.</li>
+<li>(OLD)OutputReady (like OutputTest in isRunning) sometimes doesn&#8217;t work. If
+outputReady returns in less than a second, another while-loop iterates until
+the motor has stopped, this time using motor.isRunning() (this only works as
+long as not both OutputTest and OutputReady are buggy).</li>
+<li>(OLD)Workaround: Poll isRunning (which itself return (speed&gt;0)) until it
+is false (No need to check if motor is connected as speed correctly
+returns 0 if it&#8217;s not)</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="sensor">
+<h1>Sensor<a class="headerlink" href="#sensor" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="source.Sensor">
+<em class="property">class </em><code class="descclassname">source.</code><code class="descname">Sensor</code><span class="sig-paren">(</span><em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Sensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>High-level class to work with sensors.</p>
+<p>The Sensor-class facilitates the communication with sensors. This mainly consists of
+reading the sensor&#8217;s type and current value in a specified mode.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>You don&#8217;t need to create instances of this class. The EV3-class automatically creates
+instances for each sensor port, and you can work with them via the EV3-object.</li>
+<li>The Sensor-class represents sensor ports, not individual sensors!</li>
+</ul>
+<dl class="attribute">
+<dt id="source.Sensor.mode">
+<code class="descname">mode</code><a class="headerlink" href="#source.Sensor.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DeviceMode.{Type}</em> &#8211; Sensor mode in which the value will be read. By default,
+mode is set to DeviceMode.Default.Undefined. Once a physical sensor is connected
+to the port <em>and</em> the physical Brick is connected to the EV3-object, the allowed
+mode and the default mode for a Sensor-object are the following (depending on the
+sensor type): <em>[WRITABLE]</em></p>
+<ul>
+<li><dl class="first docutils">
+<dt>Touch-Sensor:</dt>
+<dd><ul class="first last simple">
+<li>DeviceMode.Touch.Pushed [Default]</li>
+<li>DeviceMode.Touch.Bumps</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Ultrasonic-Sensor:</dt>
+<dd><ul class="first last simple">
+<li>DeviceMode.UltraSonic.DistCM [Default]</li>
+<li>DeviceMode.UltraSonic.DistIn</li>
+<li>DeviceMode.UltraSonic.Listen</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Color-Sensor:</dt>
+<dd><ul class="first last simple">
+<li>DeviceMode.Color.Reflect [Default]</li>
+<li>DeviceMode.Color.Ambient</li>
+<li>DeviceMode.Color.Col</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Gyro-Sensor:</dt>
+<dd><ul class="first last simple">
+<li>DeviceMode.Gyro.Angular [Default]</li>
+<li>DeviceMode.Gyro.Rate</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Sensor.debug">
+<code class="descname">debug</code><a class="headerlink" href="#source.Sensor.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> &#8211; Debug turned on or off. In debug mode, everytime a command is passed to
+the sublayer (&#8216;communication layer&#8217;), there is feedback in the console about what
+command has been called. <em>[WRITABLE]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Sensor.value">
+<code class="descname">value</code><a class="headerlink" href="#source.Sensor.value" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>numeric</em> &#8211; Value read from hysical sensor. What the value represents depends on
+sensor.mode. <em>[READ-ONLY]</em></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="source.Sensor.type">
+<code class="descname">type</code><a class="headerlink" href="#source.Sensor.type" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>DeviceType</em> &#8211; Type of physical sensor connected to the port. Possible types are: [READ-ONLY]</p>
+<ul class="simple">
+<li>DeviceType.NXTTouch</li>
+<li>DeviceType.NXTLight</li>
+<li>DeviceType.NXTSound</li>
+<li>DeviceType.NXTColor</li>
+<li>DeviceType.NXTUltraSonic</li>
+<li>DeviceType.NXTTemperature</li>
+<li>DeviceType.LargeMotor</li>
+<li>DeviceType.MediumMotor</li>
+<li>DeviceType.Touch</li>
+<li>DeviceType.Color</li>
+<li>DeviceType.UltraSonic</li>
+<li>DeviceType.Gyro</li>
+<li>DeviceType.InfraRed</li>
+<li>DeviceType.Unknown</li>
+<li>DeviceType.None</li>
+<li>DeviceType.Error</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Sensor.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><em>sensor</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Sensor.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets value on sensor</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>This clears ALL the sensors right now, no other Op-Code available... :(</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="source.Sensor.setProperties">
+<code class="descname">setProperties</code><span class="sig-paren">(</span><em>sensor</em>, <em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#source.Sensor.setProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets multiple Sensor properties at once using MATLAB&#8217;s inputParser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>debug</strong> (<em>bool</em>) &#8211; </li>
+<li><strong>mode</strong> (<em>DeviceMode.{Type}</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>b = EV3(); <br />
+b.connect(&#8216;bt&#8217;, &#8216;serPort&#8217;, &#8216;/dev/rfcomm0&#8217;); <br />
+b.sensor1.setProperties(&#8216;debug&#8217;, &#8216;on&#8217;, &#8216;mode&#8217;, DeviceMode.Color.Ambient); <br />
+% Instead of: b.sensor1.debug = &#8216;on&#8217;; <br />
+%             b.sensor1.mode = DeviceMode.Color.Ambient; <br /></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, LfB RWTH-Aachen.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

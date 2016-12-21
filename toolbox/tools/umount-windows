@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# script to ease unmounting a SMB share
+# (c) 2007 Johannes Ballé
+
+if [ $# -ne 0 ]; then
+	echo "Syntax: ${0##*/}" >&2
+	exit 1
+fi
+
+sudo umount ~/work && rm -rf ~/work
