@@ -16,25 +16,9 @@ for k=1:numel(inputseq)
     move = inputseq{k};
     side = move(1);
     if (side=='X')
-        if ((numel(move)>1) && (move(2) == ['''']))
-            seq{end+1} = 'y11';
-            seq{end+1} = 'y21';
-            seq{end+1} = 'y31';
-        else
-            seq{end+1} = 'y13';
-            seq{end+1} = 'y23';
-            seq{end+1} = 'y33';
-        end
-    elseif (side=='Y')
-        if ((numel(move)>1) && (move(2) == ['''']))
-            seq{end+1} = 'z11';
-            seq{end+1} = 'z21';
-            seq{end+1} = 'z31';
-        else
-            seq{end+1} = 'z13';
-            seq{end+1} = 'z23';
-            seq{end+1} = 'z33';
-        end
+        seq{end+1} = 'y11';
+        seq{end+1} = 'y21';
+        seq{end+1} = 'y31';
     else
         seq{end+1} = move;
     end

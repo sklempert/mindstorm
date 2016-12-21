@@ -531,9 +531,9 @@ if any('fblrud'==button) && d<4
     return
 end
 
-a = get(handles.CheckRot,'Value');
-x = get(handles.ccbutton,'Value');
-y = get(handles.doublebutton,'Value');
+a = get(handles.CheckRot,'Value'); % Animation-Button
+x = get(handles.ccbutton,'Value'); % '-Button
+y = get(handles.doublebutton,'Value'); % '2-Button
 
 move = button;
 if x
@@ -690,14 +690,14 @@ else
     if d==3 && iscell(move)
         for i=1:numel(move)
             if move{i}(2:end-1)=='2'
-                errordlg('Middle piece is not allowed to move.')
-                return
+%                errordlg('Middle piece is not allowed to move.')
+%                return
             end
         end
     elseif d==3
         if move(2:end-1)=='2'
-            errordlg('Middle piece is not allowed to move.')
-            return
+%            errordlg('Middle piece is not allowed to move.')
+%            return
         end
     end
 end
@@ -1216,6 +1216,7 @@ R0 = R;
 d = size(R,1);
 a = get(handles.AnimSol,'Value');
 b = get(handles.MethodMenu,'Value');
+forMindstorm = get(handles.ForMindstorm,'Value');
 method = get(handles.MethodMenu,'String');
 if iscell(method)
     method = method{b};
@@ -1251,6 +1252,8 @@ switch method
         solution = Solve45(R);
         time = toc;
         solution = rubopt(solution);
+        mindstorm_solution = sol2mindstorm(solution);
+        solution = mindstorm_solution;
         nmoves = numel(solution);
         message = {sprintf('Elapsed time: %s seconds',num2str(round(time*100)/100));...
                    sprintf('Number of moves: %d',nmoves)};
@@ -1258,6 +1261,7 @@ switch method
         R = rubrot(R0,rub2move(solution),'Animate',a);
     case 'Layer by Layer'
         [R,solution,time,nmoves] = rubsolve(R);
+        mindstorm_solution = sol2mindstorm(solution);
         message = {sprintf('Elapsed time: %s seconds',num2str(round(time*100)/100));...
                    sprintf('Number of moves: %d',nmoves)};
         set(handles.TextMessage,'String',{'Solved!';message{1};message{2}})
@@ -1269,6 +1273,7 @@ switch method
         tic
         [rot,solution] = Solve222(R);
         time = toc;
+        mindstorm_solution = sol2mindstorm(solution);
         nmoves = numel(solution);
         message = {sprintf('Elapsed time: %s seconds',num2str(round(time*100)/100));...
                    sprintf('Number of moves: %d',nmoves)};
@@ -1280,6 +1285,7 @@ switch method
         solution = Solve444(R);
         time = toc;
         nmoves = numel(solution);
+        mindstorm_solution = sol2mindstorm(solution);
         message = {sprintf('Elapsed time: %s seconds',num2str(round(time*100)/100));...
                    sprintf('Number of moves: %d',nmoves)};
         set(handles.TextMessage,'String',{'Solved!';message{1};message{2}})
@@ -1327,6 +1333,7 @@ switch method
         if d<5
             solution = move2rub(solution,d);
         end
+        mindstorm_solution = sol2mindstorm(solution);
 end
 
 rubplot(R)
@@ -1394,6 +1401,20 @@ if strcmp(ui,'Yes')
         end
     end
     fprintf(fid,'%s',solution{end});
+
+    fprintf(fid,'\n\nMindstorm solution (%d moves):\n',numel(mindstorm_solution));
+    count = 0;
+    for i=1:numel(mindstorm_solution)-1
+        fprintf(fid,'%s,',mindstorm_solution{i});
+        count = count + numel(mindstorm_solution{i})+1;
+        if count>72
+            count = 0;
+            fprintf(fid,'\n');
+        end
+    end
+    fprintf(fid,'%s',mindstorm_solution{end});
+
+    
     fclose(fid);
     open(fname)
 end
@@ -1485,3 +1506,29 @@ msgbox({'Thanks for downloading!';'Created by Joren Heit';'jorenheit@gmail.com';
            'www.math.utk.edu/~morwen/'},'About','none')
        
 
+
+
+% --- Executes on button press in XButton.
+function XButton_Callback(hObject, eventdata, handles)
+% hObject    handle to XButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+%%
+PushButton('X',handles);
+
+% --- Executes on button press in YButton.
+function YButton_Callback(hObject, eventdata, handles)
+% hObject    handle to YButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+%%
+PushButton('Y',handles);
+
+
+% --- Executes on button press in ForMindstorm.
+function ForMindstorm_Callback(hObject, eventdata, handles)
+% hObject    handle to ForMindstorm (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of ForMindstorm

@@ -37,7 +37,8 @@ for i=1:n
     end
     
     if y==2 && d==3
-        error('Middle part is not allowed to move')
+        % SK TODO: Create correct code here
+        % error('Middle part is not allowed to move')
     elseif y==d
         y = 4;
     end
