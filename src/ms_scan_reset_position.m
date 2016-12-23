@@ -1,19 +1,32 @@
-function [  ] = ms_scan_reset_position( brickObj )
+function [  ] = ms_scan_reset_position( scanMotor, scanSensor )
 
-sm = brickObj.motorD;
-ss = brickObj.sensor4
+sm = scanMotor;
+ss = scanSensor;
 
-if ss.value == 1
+if readTouch(ss) == 1
+    ms_start(sm, -90, 180);
     ms_start(sm, -90, 0);
-    while ss.value == 1
+    while readTouch(ss) == 1
     end
     ms_stop(sm);
 end
 
 ms_start(sm, 50, 0);
-while ss.value == 0
+while readTouch(ss) == 0
 end
 ms_stop(sm);
+
+% if ss.value == 1
+%     ms_start(sm, -90, 0);
+%     while ss.value == 1
+%     end
+%     ms_stop(sm);
+% end
+% 
+% ms_start(sm, 50, 0);
+% while ss.value == 0
+% end
+% ms_stop(sm);
 
 
 % sm.speedRegulation = 0;

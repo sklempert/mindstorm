@@ -1569,9 +1569,23 @@ function connectButton_Callback(hObject, eventdata, handles)
 % hObject    handle to connectButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+% global brickObj;
+% brickObj = EV3();
+% brickObj.connect('usb');
 global brickObj;
-brickObj = EV3();
-brickObj.connect('usb');
+brickObj = legoev3('usb');
+global scanSensor;
+scanSensor = touchSensor(brickObj)
+global scanMotor;
+scanMotor = motor(brickObj, 'D')
+global rotateMotor;
+rotateMotor = motor(brickObj, 'C')
+global swingMotor;
+swingMotor = motor(brickObj, 'B')
+global cSensor;
+cSensor = colorSensor(brickObj)
+
+
 
 % --- Executes on button press in disconnectButton.
 function disconnectButton_Callback(hObject, eventdata, handles)
@@ -1580,3 +1594,19 @@ function disconnectButton_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global brickObj;
 brickObj.disconnect();
+
+
+% --- Executes on button press in swingButton.
+function swingButton_Callback(hObject, eventdata, handles)
+% hObject    handle to swingButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+ms_swing();
+
+
+% --- Executes on button press in rotateButton.
+function rotateButton_Callback(hObject, eventdata, handles)
+% hObject    handle to rotateButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+ms_rotate();
